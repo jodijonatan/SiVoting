@@ -17,25 +17,12 @@ require_once __DIR__ . '/../helpers.php';
 </head>
 
 <body class="bg-gray-100 min-h-screen font-sans">
-  <!-- Navbar -->
-  <nav class="bg-white shadow sticky top-0 z-50">
-    <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-      <div class="flex items-center gap-2 text-indigo-600 font-bold text-xl">
-        <a href="admin_dashboard.php" class="text-xl font-semibold text-blue-600 hover:text-blue-800 transition">
-          🗳️ Admin - Dashboard
-        </a>
-      </div>
-      <div class="flex items-center space-x-3">
-        <span class="text-gray-600">Halo, <b><?php echo e($_SESSION['username']); ?></b></span>
-        <a href="logout.php" class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition">
-          Logout
-        </a>
-      </div>
-    </div>
-  </nav>
+
+  <!-- Include Navbar Component -->
+  <?php include __DIR__ . '/../components/nav.php'; ?>
 
   <!-- Main Content -->
-  <main class="max-w-6xl mx-auto p-6">
+  <main class="max-w-6xl mx-auto p-6 mt-6">
     <h1 class="text-2xl font-bold text-gray-800 mb-6">Welcome, Admin!</h1>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

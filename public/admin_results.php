@@ -34,20 +34,9 @@ if (!$votes_list) {
 </head>
 
 <body class="bg-gray-100 min-h-screen font-sans">
-  <!-- Navbar -->
-  <nav class="bg-white shadow sticky top-0 z-50">
-    <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-      <a href="admin_dashboard.php" class="text-xl font-semibold text-blue-600 hover:text-blue-800 transition">
-        🗳️ Admin - Hasil Voting
-      </a>
-      <div class="flex items-center space-x-3">
-        <span class="text-gray-600">Halo, <b><?php echo e($_SESSION['username']); ?></b></span>
-        <a href="logout.php" class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition">
-          Logout
-        </a>
-      </div>
-    </div>
-  </nav>
+
+  <!-- Include navbar component -->
+  <?php include __DIR__ . '/../components/nav.php'; ?>
 
   <main class="max-w-6xl mx-auto p-6">
     <!-- Header -->
@@ -69,10 +58,8 @@ if (!$votes_list) {
       <div class="bg-white p-6 rounded-xl shadow hover:shadow-md transition">
         <h3 class="text-gray-500 text-sm font-semibold uppercase mb-2">Partisipasi</h3>
         <p class="text-3xl font-bold text-purple-600">
-          <?php
-          $percent = $total_voters > 0 ? round(($total_votes / $total_voters) * 100, 1) : 0;
-          echo e($percent . '%');
-          ?>
+          <?php $percent = $total_voters > 0 ? round(($total_votes / $total_voters) * 100, 1) : 0;
+          echo e($percent . '%'); ?>
         </p>
       </div>
     </div>
@@ -99,7 +86,6 @@ if (!$votes_list) {
         </div>
       <?php endwhile; ?>
     </div>
-
 
     <!-- Log suara -->
     <div class="bg-white rounded-xl shadow overflow-hidden">
@@ -130,6 +116,7 @@ if (!$votes_list) {
       </div>
     </div>
   </main>
+
 </body>
 
 </html>

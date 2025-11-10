@@ -42,22 +42,9 @@ $res = $mysqli->query("SELECT * FROM options ORDER BY id ASC");
 </head>
 
 <body class="bg-gradient-to-br from-gray-100 via-gray-50 to-white min-h-screen text-gray-800">
-  <nav class="bg-white shadow sticky top-0 z-50">
-    <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-      <div class="flex items-center gap-2 text-blue-600 font-bold text-xl">
-        <a href="voter_dashboard.php" class="text-xl font-semibold text-blue-600 hover:text-blue-800 transition">
-          🗳️ Voter - Dashboard
-        </a>
-      </div>
-      <div class="flex items-center space-x-3">
-        <span class="text-gray-600">Halo, <b><?php echo e($_SESSION['voter_name']); ?></b></span>
-        <a href="logout.php" class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition">
-          Logout
-        </a>
-      </div>
-    </div>
-  </nav>
 
+  <!-- Include navbar component -->
+  <?php include __DIR__ . '/../components/nav.php'; ?>
 
   <main class="max-w-3xl mx-auto mt-10 px-4 fade-in-up">
     <div class="bg-white rounded-2xl shadow p-6 mb-6 border border-gray-100">
