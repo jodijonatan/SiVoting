@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <label class="block mb-4">Password<input name="password" type="password" required class="w-full p-2 border rounded"></label>
       <div class="flex gap-2">
         <button class="px-4 py-2 bg-blue-600 text-white rounded">Login</button>
-        <a href="index.php" class="px-4 py-2 border rounded">Back</a>
+        <a href="../index.php" class="px-4 py-2 border rounded">Back</a>
       </div>
     </form>
   </div>

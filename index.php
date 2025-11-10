@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . '/../init.php';
-require_once __DIR__ . '/../helpers.php';
+require_once __DIR__ . '/init.php';
+require_once __DIR__ . '/helpers.php';
 ?>
 <!doctype html>
 <html>
@@ -16,8 +16,8 @@ require_once __DIR__ . '/../helpers.php';
     <h1 class="text-2xl font-bold mb-4">Sistem Voting</h1>
     <p class="mb-6">Pilih akses:</p>
     <div class="flex gap-4">
-      <a href="admin_login.php" class="px-4 py-2 bg-blue-600 text-white rounded">Admin Login</a>
-      <a href="voter_login.php" class="px-4 py-2 bg-green-600 text-white rounded">Voter Login</a>
+      <a href="public/admin_login.php" class="px-4 py-2 bg-blue-600 text-white rounded">Admin Login</a>
+      <a href="public/voter_login.php" class="px-4 py-2 bg-green-600 text-white rounded">Voter Login</a>
     </div>
   </div>
 </body>

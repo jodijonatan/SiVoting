@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </label>
       <div class="flex gap-2">
         <button class="px-4 py-2 bg-green-600 text-white rounded">Login</button>
-        <a href="index.php" class="px-4 py-2 border rounded">Back</a>
+        <a href="../index.php" class="px-4 py-2 border rounded">Back</a>
       </div>
     </form>
   </div>
