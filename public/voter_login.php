@@ -23,30 +23,79 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 <!doctype html>
-<html>
+<html lang="id">
 
 <head>
   <meta charset="utf-8">
   <title>Voter Login</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="icon" type="image/png" href="../assets/favicon.png">
+
+  <style>
+    /* Tambahan: Background gradient */
+    body {
+      background: linear-gradient(135deg, #eceff1, #cfd8dc);
+    }
+  </style>
 </head>
 
-<body class="bg-gray-100 min-h-screen flex items-center justify-center">
-  <div class="bg-white p-8 rounded shadow max-w-md w-full">
-    <h2 class="text-xl font-bold mb-4">Voter Login</h2>
-    <?php if ($m = flash('error')): ?><div class="bg-red-100 p-2 text-red-700 mb-3 rounded"><?php echo e($m); ?></div><?php endif; ?>
-    <?php if ($m = flash('success')): ?><div class="bg-green-100 p-2 text-green-700 mb-3 rounded"><?php echo e($m); ?></div><?php endif; ?>
-    <form method="post">
-      <label class="block mb-4">Token (dari admin)
-        <input name="token" required class="w-full p-2 border rounded" />
-      </label>
-      <div class="flex gap-2">
-        <button class="px-4 py-2 bg-green-600 text-white rounded">Login</button>
-        <a href="../index.php" class="px-4 py-2 border rounded">Back</a>
+<body class="min-h-screen flex items-center justify-center p-4">
+
+  <!-- Card Login -->
+  <div class="bg-white w-full max-w-md rounded-2xl shadow-xl p-8
+              transition transform hover:shadow-2xl duration-300">
+
+    <h2 class="text-2xl font-bold mb-6 text-gray-800 text-center">
+      Voter Login
+    </h2>
+
+    <!-- Flash Message -->
+    <?php if ($m = flash('error')): ?>
+      <div class="bg-red-100 border border-red-300 text-red-700 p-3 mb-4 rounded-lg text-sm">
+        <?= e($m); ?>
+      </div>
+    <?php endif; ?>
+
+    <?php if ($m = flash('success')): ?>
+      <div class="bg-green-100 border border-green-300 text-green-700 p-3 mb-4 rounded-lg text-sm">
+        <?= e($m); ?>
+      </div>
+    <?php endif; ?>
+
+    <!-- Form -->
+    <form method="post" class="space-y-5">
+
+      <div>
+        <label class="block text-gray-700 font-medium mb-1">
+          Token (dari admin)
+        </label>
+        <input
+          name="token"
+          required
+          placeholder="Masukkan token anda..."
+          class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2
+                 focus:ring-blue-500 outline-none text-gray-800" />
+      </div>
+
+      <div class="flex flex-col sm:flex-row gap-3 pt-2">
+
+        <button
+          class="flex-1 px-4 py-3 bg-green-600 text-white rounded-lg font-semibold
+                 hover:bg-green-700 transition text-center">
+          Login
+        </button>
+
+        <a href="../index.php"
+          class="flex-1 px-4 py-3 border border-gray-400 rounded-lg text-center
+                 hover:bg-gray-100 transition font-semibold">
+          Kembali
+        </a>
+
       </div>
     </form>
+
   </div>
+
 </body>
 
 </html>

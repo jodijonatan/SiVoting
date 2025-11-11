@@ -20,7 +20,7 @@ $dashboard_label = $is_admin ? 'Admin' : 'Voter';
       </a>
     </div>
     <div class="flex items-center space-x-3">
-      <span class="text-gray-600">Halo, <b><?php echo e($user_name); ?></b></span>
+      <!-- <span class="text-gray-600">Halo, <b><?php echo e($user_name); ?></b></span> -->
       <a href="logout.php" class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition">
         Logout
       </a>
