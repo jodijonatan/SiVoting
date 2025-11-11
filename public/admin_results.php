@@ -6,6 +6,8 @@ if (!is_admin()) {
 }
 require_once __DIR__ . '/../helpers.php';
 
+$page_title = "Hasil Voting";
+
 // Ambil data statistik
 $total_voters_res = $mysqli->query("SELECT COUNT(*) AS cnt FROM voters");
 $total_voters = $total_voters_res->fetch_assoc()['cnt'];
@@ -32,21 +34,32 @@ if (!$votes_list) {
 
 <head>
   <meta charset="utf-8">
-  <title>Hasil Voting</title>
+  <title><?= $page_title ?></title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/alpinejs" defer></script>
   <link rel="icon" type="image/png" href="../assets/favicon.png">
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
 
-<body class="bg-gray-100 min-h-screen font-sans flex">
+<body class="bg-gray-100 min-h-screen font-sans"
+  x-data="{ open: true }">
 
   <!-- ✅ Sidebar -->
-  <?php include __DIR__ . '/../components/admin_sidebar.php'; ?>
+  <aside
+    x-on:sidebar-toggle.window="open = !open"
+    :class="open ? 'w-64 p-6' : 'w-20 p-2'"
+    class="bg-white shadow-lg h-screen fixed left-0 top-0 transition-all duration-300 flex flex-col">
+    <?php include __DIR__ . '/../components/admin_sidebar.php'; ?>
+  </aside>
 
-  <!-- ✅ Main Content (geser karena sidebar) -->
-  <main class="flex-1 ml-64 p-8">
+  <!-- ✅ Header -->
+  <?php include __DIR__ . '/../components/admin_header.php'; ?>
 
-    <!-- Header -->
+  <!-- ✅ Main Content -->
+  <main
+    :class="open ? 'ml-64' : 'ml-20'"
+    class="transition-all duration-300 mt-24 p-8">
+
     <h1 class="text-2xl font-bold text-gray-800 mb-6">📊 Hasil Voting</h1>
 
     <!-- Statistik -->
@@ -93,7 +106,7 @@ if (!$votes_list) {
           <div class="w-full bg-gray-200 rounded-full h-3">
             <div
               class="h-3 rounded-full bg-blue-500 transition-all duration-500"
-              style="width: <?php echo $barWidth; ?>%;">
+              style="width: <?= $barWidth ?>%;">
             </div>
           </div>
         </div>
@@ -120,11 +133,11 @@ if (!$votes_list) {
           <tbody class="divide-y">
             <?php while ($v = $votes_list->fetch_assoc()): ?>
               <tr class="hover:bg-gray-50 transition">
-                <td class="py-3 px-4 text-gray-500"><?php echo e($v['id']); ?></td>
-                <td class="py-3 px-4 text-gray-800"><?php echo e($v['voter_name']); ?></td>
-                <td class="py-3 px-4 text-blue-700 font-medium"><?php echo e($v['title']); ?></td>
+                <td class="py-3 px-4 text-gray-500"><?= e($v['id']); ?></td>
+                <td class="py-3 px-4 text-gray-800"><?= e($v['voter_name']); ?></td>
+                <td class="py-3 px-4 text-blue-700 font-medium"><?= e($v['title']); ?></td>
                 <td class="py-3 px-4 text-gray-600">
-                  <?php echo e(date('d M Y, H:i', strtotime($v['created_at']))); ?>
+                  <?= e(date('d M Y, H:i', strtotime($v['created_at']))); ?>
                 </td>
               </tr>
             <?php endwhile; ?>

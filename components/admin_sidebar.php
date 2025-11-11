@@ -2,10 +2,14 @@
 $current = basename($_SERVER['PHP_SELF']);
 ?>
 
-<aside class="w-64 bg-white shadow-lg h-screen fixed left-0 top-0 p-6 flex flex-col">
+<aside
+  class="bg-white shadow-lg h-screen fixed left-0 top-0 w-64 p-6 flex flex-col">
 
   <!-- Logo -->
-  <h1 class="text-2xl font-bold text-gray-800 mb-10">SiVoting Admin</h1>
+  <div class="mb-10 flex items-center gap-3">
+    <img src="../assets/favicon.png" alt="Logo" class="w-10 h-10 object-contain">
+    <h1 class="text-2xl font-bold text-gray-800">SiVoting</h1>
+  </div>
 
   <!-- Navigation -->
   <nav class="flex-1">
@@ -13,9 +17,12 @@ $current = basename($_SERVER['PHP_SELF']);
 
       <!-- Dashboard -->
       <li>
-        <a href="admin_dashboard.php"
+        <a
+          href="admin_dashboard.php"
           class="flex items-center gap-3 p-3 rounded-xl transition
-           <?php echo $current == 'admin_dashboard.php' ? 'bg-indigo-600 text-white' : 'hover:bg-indigo-100 hover:text-indigo-600 text-gray-700'; ?>">
+            <?= $current == 'admin_dashboard.php'
+              ? 'bg-indigo-600 text-white'
+              : 'hover:bg-indigo-100 hover:text-indigo-600 text-gray-700' ?>">
           <i class="ph ph-house text-xl"></i>
           <span>Dashboard</span>
         </a>
@@ -23,9 +30,12 @@ $current = basename($_SERVER['PHP_SELF']);
 
       <!-- Manage Voters -->
       <li>
-        <a href="admin_voters.php"
+        <a
+          href="admin_voters.php"
           class="flex items-center gap-3 p-3 rounded-xl transition
-           <?php echo $current == 'admin_voters.php' ? 'bg-indigo-600 text-white' : 'hover:bg-indigo-100 hover:text-indigo-600 text-gray-700'; ?>">
+            <?= $current == 'admin_voters.php'
+              ? 'bg-indigo-600 text-white'
+              : 'hover:bg-indigo-100 hover:text-indigo-600 text-gray-700' ?>">
           <i class="ph ph-users text-xl"></i>
           <span>Manage Voters</span>
         </a>
@@ -33,9 +43,12 @@ $current = basename($_SERVER['PHP_SELF']);
 
       <!-- Manage Options -->
       <li>
-        <a href="admin_options.php"
+        <a
+          href="admin_options.php"
           class="flex items-center gap-3 p-3 rounded-xl transition
-           <?php echo $current == 'admin_options.php' ? 'bg-indigo-600 text-white' : 'hover:bg-indigo-100 hover:text-indigo-600 text-gray-700'; ?>">
+            <?= $current == 'admin_options.php'
+              ? 'bg-indigo-600 text-white'
+              : 'hover:bg-indigo-100 hover:text-indigo-600 text-gray-700' ?>">
           <i class="ph ph-list text-xl"></i>
           <span>Manage Options</span>
         </a>
@@ -43,9 +56,12 @@ $current = basename($_SERVER['PHP_SELF']);
 
       <!-- Results -->
       <li>
-        <a href="admin_results.php"
+        <a
+          href="admin_results.php"
           class="flex items-center gap-3 p-3 rounded-xl transition
-           <?php echo $current == 'admin_results.php' ? 'bg-indigo-600 text-white' : 'hover:bg-indigo-100 hover:text-indigo-600 text-gray-700'; ?>">
+            <?= $current == 'admin_results.php'
+              ? 'bg-indigo-600 text-white'
+              : 'hover:bg-indigo-100 hover:text-indigo-600 text-gray-700' ?>">
           <i class="ph ph-chart-bar text-xl"></i>
           <span>Results</span>
         </a>
@@ -53,14 +69,5 @@ $current = basename($_SERVER['PHP_SELF']);
 
     </ul>
   </nav>
-
-  <!-- Logout -->
-  <div class="mt-auto">
-    <a href="admin_logout.php"
-      class="flex items-center gap-3 p-3 rounded-xl text-red-600 hover:bg-red-100 transition">
-      <i class="ph ph-sign-out text-xl"></i>
-      <span>Logout</span>
-    </a>
-  </div>
 
 </aside>
