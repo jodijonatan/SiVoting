@@ -22,6 +22,7 @@ $res = $mysqli->query("SELECT * FROM options ORDER BY id ASC");
   <meta charset="utf-8">
   <title>Voter Dashboard</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" type="image/png" href="../assets/favicon.png">
   <style>
     @keyframes fadeInUp {
       0% {

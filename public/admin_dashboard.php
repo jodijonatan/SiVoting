@@ -13,6 +13,7 @@ require_once __DIR__ . '/../helpers.php';
   <meta charset="utf-8">
   <title>Admin Dashboard</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" type="image/png" href="../assets/favicon.png">
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
 

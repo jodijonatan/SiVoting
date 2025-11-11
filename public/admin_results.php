@@ -31,6 +31,7 @@ if (!$votes_list) {
   <meta charset="utf-8">
   <title>Hasil Voting</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" type="image/png" href="../assets/favicon.png">
 </head>
 
 <body class="bg-gray-100 min-h-screen font-sans">

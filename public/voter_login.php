@@ -29,6 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <meta charset="utf-8">
   <title>Voter Login</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" type="image/png" href="../assets/favicon.png">
 </head>
 
 <body class="bg-gray-100 min-h-screen flex items-center justify-center">
