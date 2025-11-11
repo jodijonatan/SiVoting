@@ -53,7 +53,7 @@ $res = $mysqli->query("SELECT * FROM options ORDER BY id ASC");
       <span class="font-bold text-base sm:text-lg">SiVoting</span>
     </div>
 
-    <a href="voter_logout.php"
+    <a href="logout.php"
       class="text-sm sm:text-base bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 rounded-lg transition">
       Logout
     </a>

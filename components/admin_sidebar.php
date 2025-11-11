@@ -21,8 +21,8 @@ $current = basename($_SERVER['PHP_SELF']);
           href="admin_dashboard.php"
           class="flex items-center gap-3 p-3 rounded-xl transition
             <?= $current == 'admin_dashboard.php'
-              ? 'bg-indigo-600 text-white'
-              : 'hover:bg-indigo-100 hover:text-indigo-600 text-gray-700' ?>">
+              ? 'bg-blue-600 text-white'
+              : 'hover:bg-blue-100 hover:text-blue-600 text-gray-700' ?>">
           <i class="ph ph-house text-xl"></i>
           <span>Dashboard</span>
         </a>
@@ -34,8 +34,8 @@ $current = basename($_SERVER['PHP_SELF']);
           href="admin_voters.php"
           class="flex items-center gap-3 p-3 rounded-xl transition
             <?= $current == 'admin_voters.php'
-              ? 'bg-indigo-600 text-white'
-              : 'hover:bg-indigo-100 hover:text-indigo-600 text-gray-700' ?>">
+              ? 'bg-blue-600 text-white'
+              : 'hover:bg-blue-100 hover:text-blue-600 text-gray-700' ?>">
           <i class="ph ph-users text-xl"></i>
           <span>Manage Voters</span>
         </a>
@@ -47,8 +47,8 @@ $current = basename($_SERVER['PHP_SELF']);
           href="admin_options.php"
           class="flex items-center gap-3 p-3 rounded-xl transition
             <?= $current == 'admin_options.php'
-              ? 'bg-indigo-600 text-white'
-              : 'hover:bg-indigo-100 hover:text-indigo-600 text-gray-700' ?>">
+              ? 'bg-blue-600 text-white'
+              : 'hover:bg-blue-100 hover:text-blue-600 text-gray-700' ?>">
           <i class="ph ph-list text-xl"></i>
           <span>Manage Options</span>
         </a>
@@ -60,8 +60,8 @@ $current = basename($_SERVER['PHP_SELF']);
           href="admin_results.php"
           class="flex items-center gap-3 p-3 rounded-xl transition
             <?= $current == 'admin_results.php'
-              ? 'bg-indigo-600 text-white'
-              : 'hover:bg-indigo-100 hover:text-indigo-600 text-gray-700' ?>">
+              ? 'bg-blue-600 text-white'
+              : 'hover:bg-blue-100 hover:text-blue-600 text-gray-700' ?>">
           <i class="ph ph-chart-bar text-xl"></i>
           <span>Results</span>
         </a>

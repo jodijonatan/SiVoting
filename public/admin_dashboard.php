@@ -41,8 +41,6 @@ $page_title = "Dashboard";
       :class="open ? 'ml-64' : 'ml-20'"
       class="p-8 pt-32 min-h-screen transition-all duration-300">
 
-
-
       <!-- ✅ Cards Dashboard -->
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 

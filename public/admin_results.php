@@ -12,11 +12,14 @@ $page_title = "Hasil Voting";
 $total_voters_res = $mysqli->query("SELECT COUNT(*) AS cnt FROM voters");
 $total_voters = $total_voters_res->fetch_assoc()['cnt'];
 
-$total_votes_res = $mysqli->query("SELECT COUNT(*) AS cnt FROM votes");
-$total_votes = $total_votes_res->fetch_assoc()['cnt'];
+// Ambil total votes dari sum votes_count di tabel options untuk konsistensi
+$total_votes_res = $mysqli->query("SELECT SUM(votes_count) AS cnt FROM options");
+$total_votes = $total_votes_res->fetch_assoc()['cnt'] ?? 0;
 
+// Ambil semua opsi
 $options = $mysqli->query("SELECT * FROM options ORDER BY votes_count DESC");
 
+// Ambil riwayat voting
 $votes_list = $mysqli->query("
   SELECT v.*, o.title, vt.name AS voter_name 
   FROM votes v 
@@ -41,10 +44,9 @@ if (!$votes_list) {
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
 
-<body class="bg-gray-100 min-h-screen font-sans"
-  x-data="{ open: true }">
+<body class="bg-gray-100 min-h-screen font-sans" x-data="{ open: true }">
 
-  <!-- ✅ Sidebar -->
+  <!-- Sidebar -->
   <aside
     x-on:sidebar-toggle.window="open = !open"
     :class="open ? 'w-64 p-6' : 'w-20 p-2'"
@@ -52,13 +54,11 @@ if (!$votes_list) {
     <?php include __DIR__ . '/../components/admin_sidebar.php'; ?>
   </aside>
 
-  <!-- ✅ Header -->
+  <!-- Header -->
   <?php include __DIR__ . '/../components/admin_header.php'; ?>
 
-  <!-- ✅ Main Content -->
-  <main
-    :class="open ? 'ml-64' : 'ml-20'"
-    class="transition-all duration-300 mt-24 p-8">
+  <!-- Main Content -->
+  <main :class="open ? 'ml-64' : 'ml-20'" class="transition-all duration-300 mt-24 p-8">
 
     <h1 class="text-2xl font-bold text-gray-800 mb-6">📊 Hasil Voting</h1>
 
@@ -66,12 +66,12 @@ if (!$votes_list) {
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
       <div class="bg-white p-6 rounded-xl shadow hover:shadow-md transition">
         <h3 class="text-gray-500 text-sm font-semibold uppercase mb-2">Total Voters</h3>
-        <p class="text-3xl font-bold text-blue-600"><?php echo e($total_voters); ?></p>
+        <p class="text-3xl font-bold text-blue-600"><?= e($total_voters); ?></p>
       </div>
 
       <div class="bg-white p-6 rounded-xl shadow hover:shadow-md transition">
         <h3 class="text-gray-500 text-sm font-semibold uppercase mb-2">Total Votes</h3>
-        <p class="text-3xl font-bold text-green-600"><?php echo e($total_votes); ?></p>
+        <p class="text-3xl font-bold text-green-600"><?= e($total_votes); ?></p>
       </div>
 
       <div class="bg-white p-6 rounded-xl shadow hover:shadow-md transition">
@@ -79,6 +79,7 @@ if (!$votes_list) {
         <p class="text-3xl font-bold text-purple-600">
           <?php
           $percent = $total_voters > 0 ? round(($total_votes / $total_voters) * 100, 1) : 0;
+          $percent = min($percent, 100); // batasi maksimum 100%
           echo e($percent . '%');
           ?>
         </p>
@@ -90,17 +91,14 @@ if (!$votes_list) {
       <h2 class="text-lg font-semibold text-gray-700 mb-4">Hasil Berdasarkan Opsi</h2>
 
       <?php
-      $maxVotesRes = $mysqli->query("SELECT MAX(votes_count) as max_vote FROM options");
-      $maxVote = $maxVotesRes->fetch_assoc()['max_vote'] ?? 0;
-
       while ($opt = $options->fetch_assoc()):
         $percentOpt = $total_votes > 0 ? round(($opt['votes_count'] / $total_votes) * 100, 1) : 0;
-        $barWidth = $total_votes > 0 ? ($opt['votes_count'] / $total_votes) * 100 : 0;
+        $barWidth = min($percentOpt, 100); // batasi maksimum 100%
       ?>
         <div class="mb-4">
           <div class="flex justify-between mb-1">
-            <span class="font-medium text-gray-800"><?php echo e($opt['title']); ?></span>
-            <span class="text-sm text-gray-500"><?php echo e($opt['votes_count']); ?> suara (<?php echo e($percentOpt); ?>%)</span>
+            <span class="font-medium text-gray-800"><?= e($opt['title']); ?></span>
+            <span class="text-sm text-gray-500"><?= e($opt['votes_count']); ?> suara (<?= e($percentOpt); ?>%)</span>
           </div>
 
           <div class="w-full bg-gray-200 rounded-full h-3">
