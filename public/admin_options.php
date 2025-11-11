@@ -42,19 +42,19 @@ $res = $mysqli->query("SELECT * FROM options ORDER BY created_at DESC");
   <title>Kelola Opsi Voting</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="icon" type="image/png" href="../assets/favicon.png">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
 
-<body class="bg-gray-100 min-h-screen font-sans">
+<body class="bg-gray-100 min-h-screen font-sans flex">
 
-  <!-- Include Navbar Component -->
-  <?php include __DIR__ . '/../components/nav.php'; ?>
+  <!-- ✅ Include Sidebar -->
+  <?php include __DIR__ . '/../components/admin_sidebar.php'; ?>
 
-  <main class="max-w-5xl mx-auto p-6 mt-6">
+  <!-- ✅ Main Content (geser karena sidebar) -->
+  <main class="flex-1 ml-64 p-8">
+
     <!-- Header -->
-    <div class="flex justify-between items-center mb-6">
-      <h1 class="text-2xl font-bold text-gray-800">Kelola Opsi Voting</h1>
-      <a href="admin_dashboard.php" class="text-sm text-blue-600 hover:underline">&larr; Kembali ke Dashboard</a>
-    </div>
+    <h1 class="text-2xl font-bold text-gray-800 mb-6">Kelola Opsi Voting</h1>
 
     <!-- Flash messages -->
     <?php if ($m = flash('error')): ?>
@@ -87,7 +87,7 @@ $res = $mysqli->query("SELECT * FROM options ORDER BY created_at DESC");
 
     <!-- Daftar Opsi -->
     <div class="bg-white rounded-xl shadow overflow-hidden">
-      <div class="p-4 border-b flex justify-between items-center">
+      <div class="p-4 border-b">
         <h2 class="text-lg font-semibold text-gray-700">Daftar Opsi</h2>
       </div>
       <div class="overflow-x-auto">
@@ -118,6 +118,7 @@ $res = $mysqli->query("SELECT * FROM options ORDER BY created_at DESC");
         </table>
       </div>
     </div>
+
   </main>
 </body>
 

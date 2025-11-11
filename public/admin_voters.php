@@ -37,7 +37,6 @@ if (isset($_GET['delete'])) {
 if (isset($_GET['toggle'])) {
   $id = (int)$_GET['toggle'];
 
-  // Ambil status saat ini
   $stmt = $mysqli->prepare("SELECT voted FROM voters WHERE id = ?");
   $stmt->bind_param('i', $id);
   $stmt->execute();
@@ -46,7 +45,6 @@ if (isset($_GET['toggle'])) {
   if ($resToggle) {
     $newStatus = $resToggle['voted'] ? 0 : 1;
 
-    // Update status
     $stmt = $mysqli->prepare("UPDATE voters SET voted = ? WHERE id = ?");
     $stmt->bind_param('ii', $newStatus, $id);
     $stmt->execute();
@@ -75,19 +73,19 @@ $percent = $total_voters > 0 ? round(($total_voted / $total_voters) * 100, 1) : 
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="icon" type="image/png" href="../assets/favicon.png">
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
 
-<body class="bg-gray-100 min-h-screen font-sans">
+<body class="bg-gray-100 min-h-screen font-sans flex">
 
-  <!-- Include Navbar Component -->
-  <?php include __DIR__ . '/../components/nav.php'; ?>
+  <!-- ✅ Sidebar -->
+  <?php include __DIR__ . '/../components/admin_sidebar.php'; ?>
 
-  <main class="max-w-6xl mx-auto p-6 mt-6">
+  <!-- ✅ Konten utama (geser kanan) -->
+  <main class="flex-1 ml-64 p-8">
+
     <!-- Header -->
-    <div class="flex justify-between items-center mb-6">
-      <h1 class="text-2xl font-bold text-gray-800">👥 Kelola Voters</h1>
-      <a href="admin_dashboard.php" class="text-sm text-blue-600 hover:underline">&larr; Kembali ke Dashboard</a>
-    </div>
+    <h1 class="text-2xl font-bold text-gray-800 mb-6">👥 Kelola Voters</h1>
 
     <!-- Statistik -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
@@ -164,18 +162,15 @@ $percent = $total_voters > 0 ? round(($total_voted / $total_voters) * 100, 1) : 
                 <td class="py-3 px-4 text-center space-x-3">
 
                   <!-- Toggle Status -->
-                  <div
-                    x-data="{ voted: <?php echo $row['voted'] ? 'true' : 'false'; ?> }"
-                    class="inline-block">
+                  <div x-data="{ voted: <?php echo $row['voted'] ? 'true' : 'false'; ?> }" class="inline-block">
                     <a href="?toggle=<?php echo e($row['id']); ?>"
                       :class="voted 
-      ? 'bg-yellow-500 hover:bg-yellow-600' 
-      : 'bg-green-500 hover:bg-green-600'"
+                        ? 'bg-yellow-500 hover:bg-yellow-600' 
+                        : 'bg-green-500 hover:bg-green-600'"
                       class="px-3 py-1 text-xs font-semibold text-white rounded-full transition">
                       <span x-text="voted ? 'Set Belum Vote' : 'Set Sudah Vote'"></span>
                     </a>
                   </div>
-
 
                   <!-- Hapus -->
                   <a href="?delete=<?php echo e($row['id']); ?>"
@@ -192,6 +187,7 @@ $percent = $total_voters > 0 ? round(($total_voted / $total_voters) * 100, 1) : 
       </div>
     </div>
   </main>
+
 </body>
 
 </html>

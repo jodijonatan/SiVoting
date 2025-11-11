@@ -17,16 +17,17 @@ require_once __DIR__ . '/../helpers.php';
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
 
-<body class="bg-gray-100 min-h-screen font-sans">
+<body class="bg-gray-100 min-h-screen font-sans flex">
 
-  <!-- Include Navbar Component -->
-  <?php include __DIR__ . '/../components/nav.php'; ?>
+  <!-- ✅ Include Sidebar -->
+  <?php include __DIR__ . '/../components/admin_sidebar.php'; ?>
 
-  <!-- Main Content -->
-  <main class="max-w-6xl mx-auto p-6 mt-6">
+  <!-- ✅ Main Content -->
+  <main class="flex-1 ml-64 p-8">
     <h1 class="text-2xl font-bold text-gray-800 mb-6">Welcome, Admin!</h1>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
       <!-- Card 1 -->
       <a href="admin_voters.php" class="group p-6 bg-white rounded-2xl shadow hover:shadow-lg transition transform hover:-translate-y-1">
         <div class="flex items-center gap-4">
@@ -65,13 +66,14 @@ require_once __DIR__ . '/../helpers.php';
           </div>
         </div>
       </a>
+
     </div>
 
-    <!-- Footer -->
     <footer class="mt-12 text-center text-gray-500 text-sm">
       © <?php echo date('Y'); ?> SiVoting. All rights reserved.
     </footer>
   </main>
+
 </body>
 
 </html>
