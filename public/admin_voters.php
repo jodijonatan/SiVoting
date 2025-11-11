@@ -33,7 +33,35 @@ if (isset($_GET['delete'])) {
   exit;
 }
 
+// ✅ Toggle status voted (Belum Vote ⇆ Sudah Vote)
+if (isset($_GET['toggle'])) {
+  $id = (int)$_GET['toggle'];
+
+  // Ambil status saat ini
+  $stmt = $mysqli->prepare("SELECT voted FROM voters WHERE id = ?");
+  $stmt->bind_param('i', $id);
+  $stmt->execute();
+  $resToggle = $stmt->get_result()->fetch_assoc();
+
+  if ($resToggle) {
+    $newStatus = $resToggle['voted'] ? 0 : 1;
+
+    // Update status
+    $stmt = $mysqli->prepare("UPDATE voters SET voted = ? WHERE id = ?");
+    $stmt->bind_param('ii', $newStatus, $id);
+    $stmt->execute();
+
+    flash('success', 'Status voter berhasil diperbarui.');
+  }
+
+  header('Location: admin_voters.php');
+  exit;
+}
+
+// Ambil data voter
 $res = $mysqli->query("SELECT * FROM voters ORDER BY created_at DESC");
+
+// Statistik
 $total_voters = $mysqli->query("SELECT COUNT(*) AS c FROM voters")->fetch_assoc()['c'] ?? 0;
 $total_voted = $mysqli->query("SELECT COUNT(*) AS c FROM voters WHERE voted = 1")->fetch_assoc()['c'] ?? 0;
 $percent = $total_voters > 0 ? round(($total_voted / $total_voters) * 100, 1) : 0;
@@ -46,6 +74,7 @@ $percent = $total_voters > 0 ? round(($total_voted / $total_voters) * 100, 1) : 
   <title>Kelola Voters</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="icon" type="image/png" href="../assets/favicon.png">
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
 
 <body class="bg-gray-100 min-h-screen font-sans">
@@ -121,6 +150,8 @@ $percent = $total_voters > 0 ? round(($total_voted / $total_voters) * 100, 1) : 
                 <td class="py-3 px-4 font-medium text-gray-800"><?php echo e($row['name']); ?></td>
                 <td class="py-3 px-4 text-gray-600"><?php echo e($row['email']); ?></td>
                 <td class="py-3 px-4 font-mono text-xs bg-gray-50 rounded"><?php echo e($row['token']); ?></td>
+
+                <!-- Status -->
                 <td class="py-3 px-4">
                   <?php if ($row['voted']): ?>
                     <span class="px-3 py-1 text-xs font-semibold bg-green-100 text-green-700 rounded-full">Sudah Vote</span>
@@ -128,9 +159,31 @@ $percent = $total_voters > 0 ? round(($total_voted / $total_voters) * 100, 1) : 
                     <span class="px-3 py-1 text-xs font-semibold bg-gray-100 text-gray-600 rounded-full">Belum Vote</span>
                   <?php endif; ?>
                 </td>
-                <td class="py-3 px-4 text-center">
-                  <a href="?delete=<?php echo e($row['id']); ?>" onclick="return confirm('Hapus voter ini?')"
-                    class="text-red-600 hover:text-red-800 transition">Hapus</a>
+
+                <!-- Aksi -->
+                <td class="py-3 px-4 text-center space-x-3">
+
+                  <!-- Toggle Status -->
+                  <div
+                    x-data="{ voted: <?php echo $row['voted'] ? 'true' : 'false'; ?> }"
+                    class="inline-block">
+                    <a href="?toggle=<?php echo e($row['id']); ?>"
+                      :class="voted 
+      ? 'bg-yellow-500 hover:bg-yellow-600' 
+      : 'bg-green-500 hover:bg-green-600'"
+                      class="px-3 py-1 text-xs font-semibold text-white rounded-full transition">
+                      <span x-text="voted ? 'Set Belum Vote' : 'Set Sudah Vote'"></span>
+                    </a>
+                  </div>
+
+
+                  <!-- Hapus -->
+                  <a href="?delete=<?php echo e($row['id']); ?>"
+                    onclick="return confirm('Hapus voter ini?')"
+                    class="px-3 py-1 text-xs font-semibold bg-red-400 hover:bg-red-500 text-white rounded-full transition">
+                    Hapus
+                  </a>
+
                 </td>
               </tr>
             <?php endwhile; ?>
